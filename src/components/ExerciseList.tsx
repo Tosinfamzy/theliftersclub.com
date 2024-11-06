@@ -1,10 +1,11 @@
 import { useExercises } from "../hooks/useExercises";
+import NotFound from "./NotFound";
 
 const ExerciseList = () => {
   const { data, isLoading, error } = useExercises();
 
   if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error fetching exercises</div>;
+  if (error) return <NotFound />;
 
   return (
     <ul>
