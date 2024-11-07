@@ -1,10 +1,12 @@
 import "./App.css";
-import ExerciseList from "./components/ExerciseList";
+import ExerciseForm from "./components/ExerciseForm";
+// import ExerciseList from "./components/ExerciseList";
 
 function App() {
   return (
     <>
-      <ExerciseList />
+      <ExerciseForm />
+      {/* <ExerciseList /> */}
     </>
   );
 }
