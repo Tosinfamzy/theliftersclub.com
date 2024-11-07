@@ -8,6 +8,10 @@ const ExerciseForm = () => {
 
   const getExercise = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const search = e.target.value.toLowerCase();
+    if (!search) {
+      setExercise([]);
+      return;
+    }
     const filteredExercise =
       data?.filter((exercise) =>
         exercise.name.toLowerCase().includes(search)
