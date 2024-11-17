@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "../api/axios";
 import { Excercise } from "../interfaces/exercise.interface";
 
@@ -16,9 +16,12 @@ const addExercise = async (exercise: Excercise): Promise<Excercise> => {
 };
 
 export const usePostExercises = () => {
-  // const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: addExercise,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["exercises"] });
+    },
   });
 };
