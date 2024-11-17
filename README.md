@@ -1,50 +1,97 @@
-# React + TypeScript + Vite
+# The Lifters Club
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The Lifters Club is a web application designed to help users find and manage exercises for their workouts. The application is built using React, TypeScript, and Tailwind CSS, and it uses React Query for data fetching and state management.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [API](#api)
+- [Components](#components)
+- [Hooks](#hooks)
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+To get started with the project, clone the repository and install the dependencies:
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+git clone https://github.com/yourusername/theliftersclub.com.git
+cd theliftersclub.com
+npm install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Usage
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+To run the application in development mode, use the following command:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm run dev
 ```
+
+To build the application for production, use:
+
+```bash
+npm run build
+```
+
+To preview the production build, use:
+
+```bash
+npm run preview
+```
+
+## Project Structure
+
+The project structure is as follows:
+
+```
+/src
+  /api
+    axios.ts
+  /components
+    ExerciseForm.tsx
+    ExerciseList.tsx
+    Header.tsx
+    Layout.tsx
+    NotFound.tsx
+  /hooks
+    useExercises.ts
+  /interfaces
+    exercise.interface.tsx
+  /routes
+    router.tsx
+  /types
+    difficulty.ts
+  App.tsx
+  main.tsx
+  vite-env.d.ts
+/index.html
+/package.json
+/postcss.config.js
+/tailwind.config.js
+/tsconfig.json
+/tsconfig.app.json
+/tsconfig.node.json
+/vite.config.ts
+```
+
+## API
+
+The application uses an API to fetch exercise data. The base URL for the API is configured in the `.env` file:
+
+```
+VITE_APP_API_URL=<your_api_url>
+```
+
+## Components
+
+- **ExerciseForm**: A form component for searching and adding exercises.
+- **ExerciseList**: A component that lists all exercises fetched from the API.
+- **Header**: The header component containing navigation links.
+- **Layout**: A layout component that includes the header and renders child routes.
+- **NotFound**: A component displayed when a route is not found.
+
+## Hooks
+
+- **useExercises**: A custom hook that fetches exercise data using React Query.
