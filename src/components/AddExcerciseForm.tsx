@@ -6,13 +6,13 @@ import { excerciseType } from "../types/excerciseType";
 // import difficulty from "../types/difficulty";
 
 const AddExerciseForm = () => {
-  const { mutate } = usePostExercises();
+  const { mutateAsync } = usePostExercises();
   const [exercise, setExercise] = useState<Excercise>({
     name: "",
-    type: "cardio",
-    muscle: "abs",
+    type: "",
+    muscle: "",
     equipment: "",
-    difficulty: "easy",
+    difficulty: "",
     instructions: "",
   });
 
@@ -27,7 +27,15 @@ const AddExerciseForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    mutate(exercise);
+    mutateAsync(exercise);
+    setExercise({
+      name: "",
+      type: "",
+      muscle: "",
+      equipment: "",
+      difficulty: "",
+      instructions: "",
+    });
   };
 
   return (

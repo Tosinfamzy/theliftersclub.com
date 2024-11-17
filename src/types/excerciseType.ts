@@ -1,21 +1,21 @@
 export const excerciseType = {
-  cardio: "cardio",
+  cardio: "Cardio",
 
-  strength: "strength",
+  strength: "Strength",
 
-  flexibility: "flexibility",
+  flexibility: "Flexibility",
 
-  balance: "balance",
+  balance: "Balance",
 
-  olympic_weightlifting: "olympic_weightlifting",
+  olympic_weightlifting: "Olympic Weightlifting",
 
-  plyometrics: "plyometrics",
+  plyometrics: "Plyometrics",
 
-  powerlifting: "powerlifting",
+  powerlifting: "Powerlifting",
 
-  strongman: "strongman",
+  strongman: "Strongman",
 
-  stretching: "stretching",
+  stretching: "Stretching",
 } as const;
 
 export type excerciseType = (typeof excerciseType)[keyof typeof excerciseType];
