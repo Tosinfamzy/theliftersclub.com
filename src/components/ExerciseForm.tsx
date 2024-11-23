@@ -1,24 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useExercises } from "../hooks/useExercises";
 import { Excercise } from "../interfaces/exercise.interface";
+import useDebounce from "../hooks/useDebounce";
 
 const ExerciseForm = () => {
   const { data } = useExercises();
   const [exercise, setExercise] = useState<Excercise[]>([]);
 
-  const getExercise = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const search = e.target.value.toLowerCase();
-    if (!search) {
-      setExercise([]);
-      return;
-    }
-    const filteredExercise =
-      data?.filter((exercise) =>
-        exercise.name.toLowerCase().includes(search)
-      ) || [];
+  const [searchTerm, setSearchTerm] = useState("");
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-    setExercise(filteredExercise);
-  };
+  useEffect(() => {
+    if (debouncedSearchTerm) {
+      const filteredExercise =
+        data?.filter((exercise) =>
+          exercise.name
+            .toLowerCase()
+            .includes(debouncedSearchTerm.toLowerCase())
+        ) || [];
+      setExercise(filteredExercise);
+    } else {
+      setExercise([]);
+    }
+  }, [debouncedSearchTerm, data]);
+
+  // const getExercise = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const search = e.target.value.toLowerCase();
+  //   if (!search) {
+  //     setExercise([]);
+  //     return;
+  //   }
+  //   const filteredExercise =
+  //     data?.filter((exercise) =>
+  //       exercise.name.toLowerCase().includes(search)
+  //     ) || [];
+
+  //   setExercise(filteredExercise);
+  // };
 
   return (
     <>
@@ -33,7 +51,9 @@ const ExerciseForm = () => {
               className="flex-1 p-3 border-2 rounded-lg placeholder-yellow-500 focus:outline-none"
               placeholder="Search for an exercise eg. bench press"
               id="link-input"
-              onChange={(e) => getExercise(e)}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+              }}
             />
 
             <button className="px-10 py-3 text-white bg-cyan rounded-lg hover:bg-cyanLight focus:outline-none md:py-2">
